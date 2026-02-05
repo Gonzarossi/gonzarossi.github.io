@@ -330,13 +330,14 @@ function cargarMeses() {
   });
 
   select.value = mesDesdeFecha(hoy);
+  cargarResumen();
 }
 
 document.getElementById("mesResumen")
   .addEventListener("change", cargarResumen);
 
 cargarMeses();
-cargarResumen();
+
 
 function cargarTipos() {
   const select = document.getElementById("tipo");
@@ -371,6 +372,7 @@ if ("serviceWorker" in navigator) {
 </div>
 </body>
 </html>
+
 
 
 
