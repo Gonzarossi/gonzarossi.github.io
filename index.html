@@ -89,25 +89,7 @@
 
   <meta charset="UTF-8">
   <title>Control de Presupuesto</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 40px auto;
-    }
-    label {
-      display: block;
-      margin-top: 12px;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-    }
-    button {
-      margin-top: 20px;
-    }
-  </style>
+  
 </head>
 <body>
 
@@ -167,6 +149,7 @@ fetch(URL)
   .then(data => {
     categorias = data.categorias;
     medios = data.medios;
+    cargarTipos();
     cargarCategorias();
     cargarMedios();
   });
@@ -289,19 +272,18 @@ function cargarResumen() {
       document.getElementById("rDeudas").innerText = r.deudas;
       document.getElementById("rAhorro").innerText = r.ahorro;
       document.getElementById("rSaldo").innerText = r.saldo;
+
+      const saldoElem = document.getElementById("rSaldoContainer");
+      saldoElem.classList.remove("positivo", "negativo");
+
+      if (r.saldo >= 0) {
+        saldoElem.classList.add("positivo");
+      } else {
+        saldoElem.classList.add("negativo");
+      }
     });
-
-  const saldoElem = document.getElementById("rSaldoContainer");
-
-saldoElem.classList.remove("positivo", "negativo");
-
-if (r.saldo >= 0) {
-  saldoElem.classList.add("positivo");
-} else {
-  saldoElem.classList.add("negativo");
 }
 
-}
 
 
 function cargarMeses() {
@@ -332,6 +314,25 @@ document.getElementById("mesResumen")
 cargarMeses();
 cargarResumen();
 
+function cargarTipos() {
+  const select = document.getElementById("tipo");
+  select.innerHTML = "";
+
+  const tipos = [
+    { value: "Ingreso", label: "Ingreso" },
+    { value: "Gasto_Fijo", label: "Gasto fijo" },
+    { value: "Gasto_Variable", label: "Gasto variable" },
+    { value: "Ahorro", label: "Ahorro" },
+    { value: "Deuda", label: "Deuda" }
+  ];
+
+  tipos.forEach(t => {
+    const option = document.createElement("option");
+    option.value = t.value;
+    option.textContent = t.label;
+    select.appendChild(option);
+  });
+}
 
 
 
@@ -346,6 +347,7 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
+
 
 
 
