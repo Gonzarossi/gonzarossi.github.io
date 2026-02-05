@@ -318,16 +318,17 @@ function cargarMeses() {
   const anio = hoy.getFullYear();
 
   const meses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
   ];
 
-  meses.forEach(m => {
-    const option = document.createElement("option");
-    option.value = `${m} ${anio}`;
-    option.textContent = `${m} ${anio}`;
-    select.appendChild(option);
-  });
+ meses.forEach(m => {
+  const option = document.createElement("option");
+  option.value = `${m.toLowerCase()} ${anio}`;
+  option.textContent = `${m} ${anio}`; // visual lindo
+  select.appendChild(option);
+});
+
 
   select.value = mesDesdeFecha(hoy);
   cargarResumen();
@@ -372,6 +373,7 @@ if ("serviceWorker" in navigator) {
 </div>
 </body>
 </html>
+
 
 
 
