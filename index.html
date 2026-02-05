@@ -10,25 +10,32 @@
     --texto: #222;
   }
 
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--gris);
-    color: var(--texto);
-    margin: 0;
-    padding: 16px;
-  }
+  html, body {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #f1f8f4 0%, #e8f5ee 100%);
+  color: var(--texto);
+  margin: 0;
+  padding: 0;
+  
+
+}
+
 
   h2, h3 {
     margin-top: 0;
   }
 
   .card {
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  }
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
 
   label {
     font-size: 0.85rem;
@@ -81,6 +88,17 @@
   .negativo {
     color: var(--rojo);
   }
+
+  .app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
 </style>
 
 
@@ -92,6 +110,7 @@
   
 </head>
 <body>
+  <div class="app">
 
 <div class="card">
   <h3>Resumen mensual</h3>
@@ -344,9 +363,10 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-
+</div>
 </body>
 </html>
+
 
 
 
