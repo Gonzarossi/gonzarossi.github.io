@@ -202,8 +202,8 @@ document.getElementById("fecha").valueAsDate = new Date();
 function mesDesdeFecha(fecha) {
   const f = new Date(fecha);
   const meses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
   ];
   return meses[f.getMonth()] + " " + f.getFullYear();
 }
@@ -373,6 +373,7 @@ if ("serviceWorker" in navigator) {
 </div>
 </body>
 </html>
+
 
 
 
