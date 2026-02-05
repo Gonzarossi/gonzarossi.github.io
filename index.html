@@ -2,6 +2,88 @@
 <html lang="es">
 <head>
 
+  <style>
+  :root {
+    --verde: #2e7d32;
+    --rojo: #c62828;
+    --gris: #f5f5f5;
+    --texto: #222;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--gris);
+    color: var(--texto);
+    margin: 0;
+    padding: 16px;
+  }
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  label {
+    font-size: 0.85rem;
+    margin-top: 12px;
+    display: block;
+    color: #555;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+  }
+
+  button {
+    background: var(--verde);
+    color: white;
+    border: none;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+
+  button:active {
+    opacity: 0.9;
+  }
+
+  .resumen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .resumen-item {
+    font-size: 0.9rem;
+  }
+
+  .saldo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+
+  .positivo {
+    color: var(--verde);
+  }
+
+  .negativo {
+    color: var(--rojo);
+  }
+</style>
+
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2e7d32">
 
@@ -29,38 +111,36 @@
 </head>
 <body>
 
-<h3>Resumen mensual</h3>
+<div class="card">
+  <h3>Resumen mensual</h3>
 
-<select id="mesResumen"></select>
+  <select id="mesResumen"></select>
 
-<div id="resumen">
-  <p>Ingresos: $<span id="rIngresos">0</span></p>
-  <p>Gastos fijos: $<span id="rFijos">0</span></p>
-  <p>Gastos variables: $<span id="rVariables">0</span></p>
-  <p>Deudas: $<span id="rDeudas">0</span></p>
-  <p>Ahorro: $<span id="rAhorro">0</span></p>
-  <hr>
-  <p><strong>Saldo: $<span id="rSaldo">0</span></strong></p>
+  <div class="resumen">
+    <div class="resumen-item">Ingresos: $<span id="rIngresos"></span></div>
+    <div class="resumen-item">Gastos fijos: $<span id="rFijos"></span></div>
+    <div class="resumen-item">Gastos variables: $<span id="rVariables"></span></div>
+    <div class="resumen-item">Deudas: $<span id="rDeudas"></span></div>
+    <div class="resumen-item">Ahorro: $<span id="rAhorro"></span></div>
+  </div>
+
+  <div class="saldo" id="rSaldoContainer">
+    Saldo: $<span id="rSaldo"></span>
+  </div>
 </div>
 
 
+<div class="card">
   <h2>Nuevo movimiento</h2>
 
   <label>Tipo</label>
-  <select id="tipo">
-    <option value="Ingreso">Ingreso</option>
-    <option value="Gasto_Fijo">Gasto fijo</option>
-    <option value="Gasto_Variable">Gasto variable</option>
-    <option value="Ahorro">Ahorro</option>
-    <option value="Deuda">Deuda</option>
-  </select>
+  <select id="tipo"></select>
 
   <label>Categoría</label>
   <select id="categoria"></select>
 
   <label>Medio de pago</label>
   <select id="medio"></select>
-
 
   <label>Fecha</label>
   <input type="date" id="fecha">
@@ -72,6 +152,7 @@
   <input id="descripcion">
 
   <button onclick="guardar()">Guardar</button>
+</div>
 
   <p id="estado"></p>
 
@@ -209,6 +290,17 @@ function cargarResumen() {
       document.getElementById("rAhorro").innerText = r.ahorro;
       document.getElementById("rSaldo").innerText = r.saldo;
     });
+
+  const saldoElem = document.getElementById("rSaldoContainer");
+
+saldoElem.classList.remove("positivo", "negativo");
+
+if (r.saldo >= 0) {
+  saldoElem.classList.add("positivo");
+} else {
+  saldoElem.classList.add("negativo");
+}
+
 }
 
 
@@ -254,5 +346,6 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
+
 
 
